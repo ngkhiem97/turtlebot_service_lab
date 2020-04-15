@@ -1,0 +1,46 @@
+<launch>
+    <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+    <arg name="robot_id" default="ttb_000"></arg>
+
+    <!-- Robot location -->
+    <arg name="robot_id_x_pos"/>
+    <arg name="robot_id_y_pos"/>
+    <arg name="robot_id_z_pos"/>
+    <arg name="robot_id_yaw"/>
+
+    <!-- Robot hardware -->
+    <arg name="battery" default="1.0"/>
+    <arg name="button" default="0"/>
+    <arg name="torque" default="false"/>
+
+    <!-- Launching the robot -->
+    <group ns="/turtlebot_service/robot/$(arg robot_id)">
+        <!-- Node to publish tf states of the robot, read more: http://wiki.ros.org/robot_state_publisher -->
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" value="/turtlebot_service/robot/$(arg robot_id)" />
+        </node>
+
+        <!-- Node to spawn te robot in Gazebo -->
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+        <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model /turtlebot_service/robot/$(arg robot_id) -x $(arg robot_id_x_pos) -y $(arg robot_id_y_pos) -z $(arg robot_id_z_pos) -Y $(arg robot_id_yaw) -param robot_description" />
+        
+        <!-- Node to handle robot hardware details data -->
+        <node pkg="turtlebot_service_lab" type="turtlebot_service_lab_turtlebot3_diagnostics" name="turtlebot_service_lab_turtlebot3_diagnostics" output="screen"/>
+
+        <!-- Node to publish the hardware information -->
+        <node pkg="turtlebot_service_lab" type="turtlebot_service_lab_turtlebot3_fake_hardware" name="turtlebot_service_lab_turtlebot3_fake_hardware" output="screen">
+            <param name="battery" type="double" value="$(arg battery)" />
+            <param name="button" type="int" value="$(arg button)" />
+            <param name="torque" type="bool" value="$(arg torque)" />
+        </node>
+
+        <!-- Robot SLAM -->
+        <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping.launch">
+            <arg name="set_base_frame" value="/turtlebot_service/robot/$(arg robot_id)/base_footprint"/>
+            <arg name="set_odom_frame" value="/turtlebot_service/robot/$(arg robot_id)/odom"/>
+            <arg name="set_map_frame"  value="/turtlebot_service/robot/$(arg robot_id)/map"/>
+        </include>
+    </group>
+
+</launch>

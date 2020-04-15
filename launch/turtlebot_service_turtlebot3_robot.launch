@@ -1,0 +1,160 @@
+<launch>
+    <!-- Launching the world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_house.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+    </include> 
+
+    <!-- LAUNCHING 9 ROBOTs 
+         ONLY ROBOT #1, #6, #8 SET HARDWARE INFORMATION
+    -->
+
+    <!-- Set model type for all robots -->
+    <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+
+    <!-- LAUNCHING ROBOT #1 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_001"/>
+
+        <!-- Robot location -->
+        <arg name="robot_id_x_pos" value="-2.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+
+        <!-- Robot hardware -->
+        <arg name="battery" value="12.0"/>
+        <arg name="button" value="1"/>
+        <arg name="torque" value="true"/>
+        
+    </include>
+
+    <!-- LAUNCHING ROBOT #2 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_002"/>
+
+        <!-- Robot location -->
+        <arg name="robot_id_x_pos" value="-4.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #3 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_003"/>
+
+        <!-- Robot location -->
+        <arg name="robot_id_x_pos" value="-6.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #4 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_004"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 2.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #5 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_005"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 4.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #6 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_006"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 6.0"/>
+        <arg name="robot_id_y_pos" value="-1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 1.57"/>
+
+        <!-- Robot hardware -->
+        <arg name="battery" value="12.0"/>
+        <arg name="button" value="2"/>
+        <arg name="torque" value="true"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #7 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_007"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 0.5"/>
+        <arg name="robot_id_y_pos" value=" 1.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 0.0"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #8 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_008"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 0.5"/>
+        <arg name="robot_id_y_pos" value=" 3.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 0.0"/>
+
+        <!-- Robot hardware -->
+        <arg name="battery" value="12.0"/>
+        <arg name="button" value="1"/>
+        <arg name="torque" value="true"/>
+    </include>
+
+    <!-- LAUNCHING ROBOT #9 -->
+    <include file="$(find turtlebot_service_lab)/launch/turtlebot_service_turtlebot3_single_robot.launch">
+        <arg name="model" value="$(arg model)"/>
+
+        <!-- Name of the robot -->
+        <arg name="robot_id" value="ttb_009"/>
+
+        <!-- Robot 001 location -->
+        <arg name="robot_id_x_pos" value=" 0.5"/>
+        <arg name="robot_id_y_pos" value=" 5.0"/>
+        <arg name="robot_id_z_pos" value=" 0.0"/>
+        <arg name="robot_id_yaw"   value=" 0.0"/>
+    </include>
+</launch>
