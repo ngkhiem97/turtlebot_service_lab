@@ -41,7 +41,7 @@ void msgPub() {
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "turtlebot3_diagnostic");
+    ros::init(argc, argv, "turtlebot_service_lab_turtlebot3_fake_hardware");
     ros::NodeHandle nh;
 
     imu_pub              = nh.advertise<sensor_msgs::Imu>("imu", 10);

@@ -25,6 +25,11 @@
         <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
         <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model /turtlebot_service/robot/$(arg robot_id) -x $(arg robot_id_x_pos) -y $(arg robot_id_y_pos) -z $(arg robot_id_z_pos) -Y $(arg robot_id_yaw) -param robot_description" />
         
+        <!-- Node to register the robot to the service -->
+        <node pkg="turtlebot_service_lab" type="turtlebot_service_lab_turtlebot3_register" name="turtlebot_service_lab_turtlebot3_register" output="screen">
+            <param name="robot_id" type="string" value="$(arg robot_id)" />
+        </node>
+        
         <!-- Node to handle robot hardware details data -->
         <node pkg="turtlebot_service_lab" type="turtlebot_service_lab_turtlebot3_diagnostics" name="turtlebot_service_lab_turtlebot3_diagnostics" output="screen"/>
 
